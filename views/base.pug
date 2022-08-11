@@ -1,0 +1,29 @@
+block variables 
+
+doctype html
+html(lang="pt-br")
+	head
+		meta(charset="UTF-8")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		title F L O E M A | Home
+
+		
+		meta(property="og:type" content="website")
+		//- meta(property="og:title" content=meta.data.title)
+		//- meta(property="og:description" content=meta.data.description)
+		//- meta(property="og:image" content=meta.data.image ? meta.data.image.url : '')
+
+		//- meta(name="twitter:card" content="summary_large_image")
+		//- meta(name="twitter:title" content=meta.data.title)
+		//- meta(name="twitter:description" content=meta.data.description)
+		//- meta(name="twitter:image" content=meta.data.image ? meta.data.image.url : '')
+
+		link(href="main.css" rel="stylesheet")
+
+	body    
+		include ./partials/preloader
+		include ./partials/navigation
+
+		.content#content(data-template=template)
+			block content
