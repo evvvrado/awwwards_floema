@@ -49,14 +49,14 @@ const handleRequest = async (api) => {
 			api.query(Prismic.Predicates.at('document.type', 'collection'), {
 				fetchLinks: 'product.image',
 			}),
-		]);
+		])
 
 
 	// } catch (error) {
-	// 	console.log(error)
+	// console.log(error)
 	// }
 
-	// const assets = []
+	const assets = []
 
 	// home.data.gallery.forEach((item) => {
 	// 	assets.push(item.image.url)
@@ -66,13 +66,13 @@ const handleRequest = async (api) => {
 	// 	assets.push(item.image.url)
 	// })
 
-	// about.data.body.forEach((section) => {
-	// 	if (section.slice_type === 'gallery') {
-	// 		section.items.forEach((item) => {
-	// 			assets.push(item.image.url)
-	// 		})
-	// 	}
-	// })
+	about.data.body.forEach((section) => {
+		if (section.slice_type === 'gallery') {
+			section.items.forEach((item) => {
+				assets.push(item.image.url)
+			})
+		}
+	})
 
 	// collections.forEach((collection) => {
 	// 	collection.data.products.forEach((item) => {
@@ -82,22 +82,66 @@ const handleRequest = async (api) => {
 
 	// console.log(assets)
 
-	// return {
-	// 	assets,
-	// 	meta,
-	// 	home,
-	// 	collections,
-	// 	about,
-	// 	navigation,
-	// 	preloader,
-	// }
+	return {
+		assets,
+		// meta,
+		// home,
+		collections,
+		about,
+		// navigation,
+		preloader,
+	}
 
-	return { preloader }
 }
 
 
+// Link Resolver
+const HandleLinkResolver = (doc) => {
+	if (doc.type === 'product') {
+		return `/detail/${doc.slug}`
+	}
+
+	if (doc.type === 'collections') {
+		return '/collections'
+	}
+
+	if (doc.type === 'about') {
+		return `/about`
+	}
+
+	// Default to homepage
+	return '/'
+}
+
+
+// Middleware to inject prismic context
+app.use((req, res, next) => {
+	const ua = UAParser(req.headers['user-agent'])
+
+	res.locals.isDesktop = ua.device.type === undefined
+	res.locals.isPhone = ua.device.type === 'mobile'
+	res.locals.isTablet = ua.device.type === 'tablet'
+
+	res.locals.Link = HandleLinkResolver
+	res.locals.PrismicH = PrismicH
+	res.locals.Numbers = (index) => {
+		return index === 0
+			? 'One'
+			: index === 1
+				? 'Two'
+				: index === 2
+					? 'Three'
+					: index === 3
+						? 'Four'
+						: ''
+	}
+
+	next()
+})
+
+
 app.get('/', async (req, res) => {
-	const api = await initApi(req);
+	const api = await initApi(req)
 	const defaults = await handleRequest(api)
 
 
@@ -110,15 +154,36 @@ app.get('/about', async (req, res) => {
 	const api = await initApi(req)
 	const defaults = await handleRequest(api)
 
+
 	res.render('pages/about', {
 		...defaults,
 	})
 })
 
-app.get('/detail/:uid', (req, res) => {
-	res.render('pages/detail')
-})
 
+
+app.get('/detail/:uid', async (req, res) => {
+	const api = await initApi(req)
+	const defaults = await handleRequest(api)
+
+	console.log(req.params.uid)
+
+	// try {
+	const product = await api.getByUID('product', req.params.uid, {
+		fetchLinks: 'collection.title',
+	});
+	// } catch (error) {
+	// console.log(error)
+	// }
+
+	// console.log(product)
+
+
+	res.render('pages/detail', {
+		...defaults,
+		product,
+	})
+})
 app.get('/collections', (req, res) => {
 	res.render('pages/collections')
 })
