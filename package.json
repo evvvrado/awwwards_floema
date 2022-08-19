@@ -12,10 +12,14 @@
 	"license": "ISC",
 	"devDependencies": {
 		"@babel/core": "^7.18.9",
+		"@prismicio/client": "^6.6.4",
+		"@prismicio/helpers": "^2.3.3",
 		"babel-loader": "^8.2.5",
 		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "^11.0.0",
 		"css-loader": "^6.7.1",
+		"dotenv": "^16.0.1",
+		"errorhandler": "^1.5.1",
 		"eslint": "^8.20.0",
 		"eslint-config-standard": "^17.0.0",
 		"eslint-loader": "^4.0.2",
@@ -25,22 +29,22 @@
 		"file-loader": "^6.2.0",
 		"image-minimizer-webpack-plugin": "^3.2.3",
 		"imagemin": "^8.0.1",
+		"method-override": "^3.0.0",
 		"mini-css-extract-plugin": "^2.6.1",
+		"morgan": "^1.10.0",
+		"node-fetch": "^2.6.7",
 		"postcss-loader": "^7.0.1",
 		"sass": "^1.54.0",
 		"sass-loader": "^13.0.2",
 		"terser-webpack-plugin": "^5.3.3",
+		"ua-parser-js": "^1.0.2",
 		"webpack": "^5.74.0",
 		"webpack-cli": "^4.10.0",
 		"webpack-dev-server": "^4.9.3",
 		"webpack-merge": "^5.8.0"
 	},
 	"dependencies": {
-		"@prismicio/client": "^6.6.4",
-		"@prismicio/helpers": "^2.3.3",
-		"dotenv": "^16.0.1",
 		"express": "^4.18.1",
-		"prismic-dom": "^2.2.7",
 		"pug": "^3.0.2"
 	}
 }
