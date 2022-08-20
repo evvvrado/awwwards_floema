@@ -85,10 +85,10 @@ const handleRequest = async (api) => {
 	return {
 		assets,
 		// meta,
-		// home,
+		home,
 		collections,
 		about,
-		// navigation,
+		navigation,
 		preloader,
 	}
 
@@ -184,9 +184,16 @@ app.get('/detail/:uid', async (req, res) => {
 		product,
 	})
 })
-app.get('/collections', (req, res) => {
-	res.render('pages/collections')
-})
+
+
+app.get('/collections', async (req, res) => {
+	const api = await initApi(req);
+	const defaults = await handleRequest(api);
+
+	res.render('pages/collections', {
+		...defaults,
+	});
+});
 
 app.listen(port, () => {
 	console.log(`INICIANDO EM: http://localhost:${port}`)
