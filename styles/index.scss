@@ -1,3 +1,24 @@
-.class {
-    background: black;
-}
+@import "./utils/variable";
+@import "./utils/functions";
+@import "./utils/mixins";
+@import "./utils/vendors";
+@import "./utils/responsive";
+
+@import "./shared/title";
+@import "./shared/descriptions";
+
+@import "./base/reset";
+@import "./base/fonts";
+@import "./base/base";
+
+@import "./pages/about/about";
+@import "./pages/about/content";
+@import "./pages/about/highlight";
+
+@import "./pages/home/home";
+
+@import "./pages/details/details";
+
+@import "./pages/collections/collections";
+
+@import "./components/preloader";
