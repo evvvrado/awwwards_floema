@@ -12,25 +12,27 @@ block content
 						figure.about__gallery__media 
 							img.about__gallery__media__image(alt=media.image.alt src=media.image.url)
 					
-				each section in about.data.body 
-					//- For some reason, sections with content and text slice type are inverted
+			each section in about.data.body 
+				//- For some reason, sections with content and text slice type are inverted
 
-					if section.slice_type == 'content'
-						h2.about__title=section.primary.title 
-					if section.slice_type == 'title'
-						section.about__content
-							script.
-								console.log(!{JSON.stringify(section.primary)})
-							.about__content__wrapper 
+				if section.slice_type == 'content'
+					h2.about__title!=section.primary.title.replace(/\n/g, '<br>')
+					
+				if section.slice_type == 'title'
+					section.about__content(class=`${section.primary.type === 'Left' ? 'about__content--left' : 'about__content--right'}`)
+						script.
+							console.log(!{JSON.stringify(section.primary)})
+						.about__content__wrapper 
+							.about__content__box
 								p.about__content__label=section.primary.label 
 
 								.about__content__description!=PrismicH.asHTML(section.primary.description)
 
-								figure.about__content__media 
-									img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
-					if section.slice_type == 'highlight'
-						section.about__highlight 
-							.about_highlight__wrapper 
+							figure.about__content__media 
+								img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
+				if section.slice_type == 'highlight'
+					section.about__highlight 
+						.about_highlight__wrapper 
 							if section.primary.label
 								p.about__highlight__label=section.primary.label
 							
@@ -41,9 +43,9 @@ block content
 								figure.about__highlight__media 
 									img.about__highlight__media__image(alt=media.image.alt src=media.image.url)
 
-					if section.slice_type == 'gallery'
-						section.about__images
-							.about__images__wrapper
-								each media in section.items 
-									figure.about__images__media 
-										img.about__images__media__image(alt=media.image.alt src=media.image.url)
+				if section.slice_type == 'gallery'
+					section.about__gallery
+						.about__gallery__wrapper
+							each media in section.items 
+								figure.about__gallery__media 
+									img.about__gallery__media__image(alt=media.image.alt src=media.image.url)

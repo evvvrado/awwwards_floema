@@ -1,3 +1,5 @@
+@import "./base/reset";
+
 @import "./utils/variable";
 @import "./utils/functions";
 @import "./utils/mixins";
@@ -6,13 +8,17 @@
 
 @import "./shared/title";
 @import "./shared/descriptions";
+@import "./shared/vertical-title";
+@import "./shared/link";
 
-@import "./base/reset";
+@import "./layout/navigation";
+
 @import "./base/fonts";
 @import "./base/base";
 
 @import "./pages/about/about";
 @import "./pages/about/content";
+@import "./pages/about/gallery";
 @import "./pages/about/highlight";
 
 @import "./pages/home/home";
