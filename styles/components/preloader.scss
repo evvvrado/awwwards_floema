@@ -5,21 +5,20 @@
 	color: $color-white;
 	text-align: center;
 
-	display: none;
+	// display: none;
 
 	z-index: z("preloader");
 }
 .preloader__text {
-	font-size: 0;
 	max-width: 66rem;
 
 	span {
 		display: inline-block;
 		overflow: hidden;
+		@extend %title-53;
 	}
 
 	span span {
-		@extend %title-53;
 	}
 }
 .preloader__number {
@@ -34,7 +33,6 @@
 		font-size: 2.5rem;
 	}
 }
-
 .preloader__number__text {
 	display: inline-block;
 }
