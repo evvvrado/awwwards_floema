@@ -168,7 +168,7 @@ app.get('/detail/:uid', async (req, res) => {
 	const api = await initApi(req)
 	const defaults = await handleRequest(api)
 
-	console.log(req.params.uid)
+	// console.log(req.params.uid)
 
 	// try {
 	const product = await api.getByUID('product', req.params.uid, {

@@ -1,0 +1,21 @@
+/*! ../animations/Highlight */
+
+/*! ../animations/Label */
+
+/*! ../animations/Paragraph */
+
+/*! animations/Title */
+
+/*! gsap */
+
+/*! lodash/each */
+
+/*! lodash/map */
+
+/*! normalize-wheel */
+
+/*! prefix */
+
+/*!*****************************!*\
+  !*** ./app/classes/Page.js ***!
+  \*****************************/

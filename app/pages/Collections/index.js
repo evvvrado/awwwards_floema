@@ -7,6 +7,4 @@ export default class Collections extends Page {
 			element: '.collections',
 		})
 	}
-
-
 }
