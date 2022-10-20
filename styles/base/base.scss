@@ -12,12 +12,17 @@ html {
 	@include media("<phone") {
 		font-size: calc(100vw / 750 * 10);
 	}
+
+	background-color: $color-contessa;
+	color: $color-white;
 }
 
 body {
 	font-family: $font-suisse-bp;
 	font-size: 16px;
 	font-weight: 300;
+
+	font-family: $font-suisse-bp;
 
 	@extend %cover;
 }
@@ -34,6 +39,16 @@ button {
 	color: inherit;
 	cursor: pointer;
 	outline: none;
+}
+
+img {
+	opacity: 0;
+	vertical-align: middle;
+	transition: opacity 0.4s ease;
+
+	&.loaded {
+		opacity: 1;
+	}
 }
 
 .content,

@@ -1,10 +1,10 @@
 .home {
-	@extend %cover;
+	@extend %page;
 	@extend %center;
 	text-align: center;
 
-	background: $color-contessa;
-	color: $color-white;
+	// background: $color-contessa;
+	// color: $color-white;
 	overflow: hidden;
 	text-align: center;
 

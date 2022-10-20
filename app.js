@@ -164,28 +164,32 @@ app.get('/about', async (req, res) => {
 
 
 
+
+
 app.get('/detail/:uid', async (req, res) => {
-	const api = await initApi(req)
+	const api = initApi(req)
 	const defaults = await handleRequest(api)
 
 	// console.log(req.params.uid)
 
-	// try {
-	const product = await api.getByUID('product', req.params.uid, {
-		fetchLinks: 'collection.title',
-	});
-	// } catch (error) {
-	// console.log(error)
-	// }
+	try {
+		const product = await api.getByUID('product', req.params.uid, {
+			fetchLinks: 'collection.title',
+		});
 
-	// console.log(product)
+		console.log(product.data.collection);
 
+		res.render('pages/detail', {
+			...defaults,
+			product,
+		})
 
-	res.render('pages/detail', {
-		...defaults,
-		product,
-	})
+	} catch (error) {
+		console.log(error)
+	}
+
 })
+
 
 
 app.get('/collections', async (req, res) => {
