@@ -7,7 +7,6 @@ import GSAP from 'gsap';
 import Preloader from 'components/Preloader'
 import Navigation from './components/Navigation'
 
-
 class App {
 	constructor() {
 
@@ -61,16 +60,29 @@ class App {
 		this.page.show()
 	}
 
+	onPopState() {
+		this.onChange({
+			url: window.location.pathname,
+			push: true,
+		})
+	}
 
-	async onChange(url) {
+	async onChange({ url, push = true }) {
 		await this.page.hide()
 
 
 		const request = await window.fetch(url)
 
+		console.log(url);
+
 		if (request.status === 200) {
 			const html = await request.text()
 			const div = document.createElement('div')
+
+			if (push) {
+				window.history.pushState({}, '', url)
+			}
+
 
 			div.innerHTML = html
 			const divContent = div.querySelector('.content')
@@ -86,6 +98,8 @@ class App {
 			this.page.create()
 			this.onResize()
 			this.page.show()
+
+			this.addLinkListeners();
 		} else {
 			console.log("Erro: ", request.error)
 		}
@@ -101,6 +115,7 @@ class App {
 	}
 
 	addListeners() {
+		window.addEventListener('popstate', this.onPopState.bind(this))
 		window.addEventListener('resize', this.onResize.bind(this))
 	}
 
@@ -111,7 +126,7 @@ class App {
 			link.onclick = event => {
 				const { href } = link
 				event.preventDefault()
-				this.onChange(href)
+				this.onChange({ url: href })
 			}
 		})
 	}

@@ -1,7 +1,7 @@
 block variables 
 
 doctype html
-html(lang="pt-br")
+html(lang="pt-br" class=isDesktop ?"desktop" : isTablet ? "tablet" : isPhone ? "phone": "")
 	head
 		meta(charset="UTF-8")
 		meta(http-equiv="X-UA-Compatible", content="IE=edge")

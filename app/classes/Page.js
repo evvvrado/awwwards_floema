@@ -202,8 +202,6 @@ export default class Page {
 
 	destroy() {
 		this.removeEventListeners()
-
-		super.destroy()
 	}
 
 }

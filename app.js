@@ -5,6 +5,7 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const port = 666
+const uaParser = require('ua-parser-js')
 
 
 app.set('views', path.join(__dirname, 'views'))
