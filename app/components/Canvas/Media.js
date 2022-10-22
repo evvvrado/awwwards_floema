@@ -6,12 +6,13 @@ import vertex from 'shaders/plane-vertex.glsl'
 
 
 export default class {
-	constructor({ element, gl, geometry, index, scene }) {
+	constructor({ element, gl, geometry, index, scene, sizes }) {
 		this.element = element
 		this.gl = gl
 		this.geometry = geometry
 		this.scene = scene
 		this.index = index
+		this.sizes = sizes
 
 
 
@@ -24,7 +25,7 @@ export default class {
 	createTexture() {
 		this.texture = new Texture(this.gl)
 
-		console.log(this.element)
+		// console.log(this.element)
 
 		this.image = new window.Image()
 		this.image.crossOrigin = 'anonymous'
@@ -53,8 +54,53 @@ export default class {
 		})
 
 
+
 		this.mesh.setParent(this.scene)
 
 		this.mesh.position.x += this.index * this.mesh.scale.x
 	}
+
+	createBounds({ sizes }) {
+		this.bounds = this.element.getBoundingClientRect()
+		this.sizes = sizes
+
+		this.updateScale(sizes)
+		this.updateX()
+		this.updateY()
+	}
+
+	updateScale() {
+		this.width = this.bounds.width / window.innerWidth
+		this.height = this.bounds.height / window.innerHeight
+
+		this.mesh.scale.x = this.sizes.width * this.width
+		this.mesh.scale.y = this.sizes.height * this.height
+
+	}
+
+
+	updateX(x = 0) {
+		this.x = (this.bounds.left + x) / window.innerWidth;
+
+		this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) // prettier-ignore
+	}
+
+	updateY(y = 0) {
+		this.y = (this.bounds.top + y) / window.innerHeight;
+
+		this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height) // prettier-ignore
+	}
+
+
+	update(scroll) {
+		if (!this.bounds) return
+
+		this.updateX(scroll.x)
+		this.updateY(scroll.y)
+	}
+
+	onResize(sizes) {
+		this.createBounds(sizes)
+	}
+
 }
