@@ -3,9 +3,10 @@ import About from 'pages/About'
 import Collections from 'pages/Collections'
 import Detail from 'pages/Detail'
 import Home from 'pages/Home'
-import GSAP from 'gsap';
 import Preloader from 'components/Preloader'
-import Navigation from './components/Navigation'
+import Navigation from 'components/Navigation'
+
+import Canvas from 'components/Canvas'
 
 class App {
 	constructor() {
@@ -14,6 +15,7 @@ class App {
 
 		this.createPreloader()
 		this.createNavigation()
+		this.createCanvas()
 		this.createPages()
 
 		this.addLinkListeners()
@@ -31,6 +33,10 @@ class App {
 	createPreloader() {
 		this.preloader = new Preloader()
 		this.preloader.once('completed', this.onPreloaded.bind(this))
+	}
+
+	createCanvas() {
+		this.canvas = new Canvas()
 	}
 
 	createContent() {
@@ -106,10 +112,12 @@ class App {
 	}
 
 	onResize() {
+		if (this.canvas && this.canvas.onResize) this.canvas.onResize()
 		if (this.page && this.page.onResize) this.page.onResize()
 	}
 
 	update() {
+		if (this.canvas && this.canvas.update) this.canvas.update()
 		if (this.page && this.page.update) this.page.update()
 		this.frame = window.requestAnimationFrame(this.update.bind(this))
 	}
