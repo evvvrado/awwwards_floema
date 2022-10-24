@@ -28,7 +28,7 @@ export default class Page {
 		this.id = id
 		this.transformPrefix = Prefix('transform')
 
-		this.onMouseWheelEvent = this.onMouseWheel.bind(this)
+		// this.onMouseWheelEvent = this.onMouseWheel.bind(this)
 	}
 
 	create() {
@@ -156,7 +156,7 @@ export default class Page {
 	 * Events
 	 */
 
-	onMouseWheel({ deltaY }) {
+	onWheel({ deltaY }) {
 		this.scroll.target += deltaY
 	}
 
@@ -189,7 +189,7 @@ export default class Page {
 	 */
 
 	addEventListeners() {
-		window.addEventListener('mousewheel', this.onMouseWheelEvent)
+		// window.addEventListener('mousewheel', this.onMouseWheelEvent)
 	}
 
 	removeEventListeners() { }

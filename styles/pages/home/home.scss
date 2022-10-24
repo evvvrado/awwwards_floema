@@ -85,10 +85,10 @@
 .home__gallery {
 	visibility: hidden;
 	@extend %cover;
+	height: 172.5rem;
+	width: 241.8rem + 9rem;
 }
 .home__gallery__media {
-	width: 172.5rem;
-	height: 241.8rem;
 	position: absolute;
 
 	&:nth-child(1) {
